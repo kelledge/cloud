@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  react:
+    image: jenkins/jenkins:lts
+    volumes:
+      - jenkins_home:/var/jenkins_home:rw
+      - /var/run/docker.sock:/tmp/docker.sock:rw
+    environment:
+      - 'VIRTUAL_HOST=ci.kevinelledge.com'
+      - 'VIRTUAL_PORT=8080'
+      - 'HTTPS_METHOD=redirect'
+      - 'LETSENCRYPT_HOST=ci.kevinelledge.com'
+      - 'LETSENCRYPT_EMAIL=me@ci.kevinelledge.com'
+
+volumes:
+  jenkins_home:
+
+networks:
+  default:
+    external:
+      name: webproxy
