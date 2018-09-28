@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  react:
+    image: nginx
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    environment:
+      - 'VIRTUAL_HOST=howfuckedismyreactapp.com'
+      - 'HTTPS_METHOD=redirect'
+      - 'LETSENCRYPT_HOST=howfuckedismyreactapp.com'
+      - 'LETSENCRYPT_EMAIL=me@howfuckedismyreactapp.com'
+
+  js:
+    image: nginx
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+    environment:
+      - 'VIRTUAL_HOST=howfuckedismyjsapp.com'
+      - 'HTTPS_METHOD=redirect'
+      - 'LETSENCRYPT_HOST=howfuckedismyjsapp.com'
+      - 'LETSENCRYPT_EMAIL=me@howfuckedismyjsapp.com'
+
+networks:
+  default:
+    external:
+      name: webproxy
