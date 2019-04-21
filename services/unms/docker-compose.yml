@@ -1,0 +1,16 @@
+version: '2'
+services:
+  unms:
+    image: oznu/unms:latest  # use "armhf" instead of "latest" for arm devices
+    restart: always
+    ports:
+      - 9080:80
+      - 9443:443
+      - 2055:2055/udp
+    environment:
+      - TZ=America/Chicago
+    volumes:
+      - config:/config
+
+volumes:
+  config:
